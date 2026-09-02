@@ -9,9 +9,9 @@ namespace EmployeeManagementSystem.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly EmployeeService _service;
+        private readonly IEmployeeService _service;
 
-        public EmployeeController(EmployeeService service)
+        public EmployeeController(IEmployeeService service)
         {
             _service = service;
         }
