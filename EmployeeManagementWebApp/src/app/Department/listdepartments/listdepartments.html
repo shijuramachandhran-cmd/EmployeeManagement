@@ -1,0 +1,80 @@
+<div class="card shadow-sm">
+  <div class="card-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Departments</h5>
+      <a class="btn btn-primary btn-sm" routerLink="/adddepartment">
+        <i class="fa-solid fa-plus me-1" aria-hidden="true"></i>
+        Add
+      </a>
+    </div>
+  </div>
+  
+
+
+  <div class="card-body">
+
+    <table class="table table-hover align-middle">
+
+      <thead class="table-light">
+        <tr>
+          <th>Department Name</th>
+          <th style="width: 180px;">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let department of departments">
+
+          <td>
+            {{ department.name }}
+          </td>
+
+          <td>
+            <div class="dropdown">
+
+              <button
+                class="btn btn-sm btn-secondary dropdown-toggle"
+                type="button"
+                [attr.aria-expanded]="openDepartmentId === department.id"
+                (click)="toggleDropdown(department.id)">
+
+                Actions
+
+              </button>
+
+              <ul class="dropdown-menu" [class.show]="openDepartmentId === department.id">
+
+                <li>
+                  <button
+                    class="dropdown-item" (click)="editDepartment(department)">
+
+                    <i class="fa-solid fa-pen-to-square me-2"></i>
+                    Edit
+
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    class="dropdown-item text-danger">
+
+                    <i class="fa-solid fa-trash me-2"></i>
+                    Delete
+
+                  </button>
+                </li>
+
+              </ul>
+
+            </div>
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+</div>

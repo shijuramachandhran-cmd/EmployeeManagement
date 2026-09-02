@@ -1,0 +1,90 @@
+<div class="app-container">
+
+  <!-- Top Header -->
+  <header class="top-header">
+
+    <button
+      type="button"
+      class="menu-button"
+      (click)="toggleSidebar()">
+
+      <i class="fa-solid fa-bars"></i>
+
+    </button>
+
+    <span class="app-title">
+      Employee Management System
+    </span>
+
+  </header>
+
+
+  <!-- Main Area -->
+  <div class="main-container">
+
+    <!-- Sidebar -->
+    <aside
+      class="sidebar"
+      [class.sidebar-closed]="!isSidebarOpen">
+
+      <nav class="nav flex-column">
+
+        <a
+          routerLink="/dashboard"
+          routerLinkActive="active"
+          class="nav-link">
+
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Dashboard</span>
+
+        </a>
+
+
+        <a
+          routerLink="/employees"
+          routerLinkActive="active"
+          class="nav-link">
+
+          <i class="fa-solid fa-users"></i>
+          <span>Employees</span>
+
+        </a>
+
+
+        <a routerLink="/listdepartments"
+          routerLinkActive="active"
+          class="nav-link">
+
+          <i class="fa-solid fa-building"></i>
+          <span>Departments</span>
+
+        </a>
+
+
+        <a
+          routerLink="/leave-management"
+          routerLinkActive="active"
+          class="nav-link">
+
+          <i class="fa-solid fa-calendar-days"></i>
+          <span>Leave Management</span>
+
+        </a>
+
+      </nav>
+
+    </aside>
+
+
+    <!-- Content -->
+    <main
+      class="content"
+      [class.content-expanded]="!isSidebarOpen">
+
+      <router-outlet></router-outlet>
+
+    </main>
+
+  </div>
+
+</div>

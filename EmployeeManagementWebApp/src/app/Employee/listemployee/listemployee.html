@@ -1,0 +1,192 @@
+<div class="card shadow-sm">
+
+  <!-- Header -->
+  <div class="card-header d-flex justify-content-between align-items-center">
+
+    <h5 class="mb-0">
+      Employees
+    </h5>
+
+    <button
+  type="button"
+  class="btn btn-primary"
+  (click)="openAddEmployee()">
+
+  <i class="fa-solid fa-plus me-1"></i>
+  Add Employee
+
+</button>
+
+  </div>
+
+
+  <!-- Table -->
+  <div class="card-body">
+
+    <div class="table-responsive">
+
+      <table class="table table-hover align-middle">
+
+        <thead class="table-light">
+
+          <tr>
+
+            <th>Name</th>
+
+            <th>DOB</th>
+
+            <th>Department</th>
+
+            <th>Phone Number</th>
+
+            <th>Email</th>
+
+            <th style="width: 120px;">
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr *ngFor="let employee of employees">
+
+            <!-- Name -->
+            <td>
+              {{ employee.name }}
+            </td>
+
+
+            <!-- DOB -->
+            <td>
+              {{ employee.dob | date:'dd-MM-yyyy' }}
+            </td>
+
+
+            <!-- Department -->
+            <td>
+              {{ employee.departmentId }}
+            </td>
+
+
+            <!-- Phone -->
+            <td>
+              {{ employee.phoneNumber }}
+            </td>
+
+
+            <!-- Email -->
+            <td>
+              {{ employee.email }}
+            </td>
+
+
+            <!-- Actions -->
+            <td>
+
+              <div class="dropdown">
+
+                <button
+                  type="button"
+                  class="btn btn-sm btn-secondary dropdown-toggle"
+                  [attr.aria-expanded]="openEmployeeId === employee.id"
+                  (click)="toggleDropdown(employee.id)">
+
+                  Actions
+
+                </button>
+
+
+                <ul
+                  class="dropdown-menu"
+                  [class.show]="openEmployeeId === employee.id">
+
+                  <!-- Edit -->
+                  <li>
+
+                    <button
+                      type="button"
+                      class="dropdown-item"
+                      >
+
+                      <i class="fa-solid fa-pen-to-square me-2"></i>
+                      Edit
+
+                    </button>
+
+                  </li>
+
+
+                  <!-- Delete -->
+                  <li>
+
+                    <button
+                      type="button"
+                      class="dropdown-item text-danger">
+
+                      <i class="fa-solid fa-trash me-2"></i>
+                      Delete
+
+                    </button>
+
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- No employees -->
+          <tr *ngIf="employees.length === 0">
+
+            <td
+              colspan="6"
+              class="text-center text-muted py-4">
+
+              No employees found.
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+@if (showAddEmployee) {
+
+  <div
+    class="modal fade show d-block"
+    tabindex="-1"
+    style="background-color: rgba(0,0,0,0.5);">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+      <div class="modal-content">
+
+        <div class="modal-body">
+
+          <app-addemployee (employeeSaved)="closeAddEmployee()">
+          </app-addemployee>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}

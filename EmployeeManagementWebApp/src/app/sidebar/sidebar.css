@@ -1,0 +1,132 @@
+.app-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+/* Header */
+
+.top-header {
+  height: 42px;
+  background-color: #4da3f5;
+  color: white;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 12px;
+}
+
+.menu-button {
+  background: transparent;
+  border: none;
+  color: white;
+
+  font-size: 18px;
+
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.app-title {
+  font-size: 16px;
+  margin-left: 4px;
+}
+
+
+/* Main */
+
+.main-container {
+  display: flex;
+  height: calc(100vh - 42px);
+}
+
+
+/* Sidebar */
+
+.sidebar {
+  width: 260px;
+
+  background-color: #f8f9fc;
+
+  border-right: 1px solid #e1e1e1;
+
+  transition: width 0.25s ease;
+
+  overflow: hidden;
+}
+
+.sidebar-closed {
+  width: 0;
+}
+
+
+/* Menu */
+
+.nav {
+  padding-top: 8px;
+}
+
+.nav-link {
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 25px;
+
+  color: #5267a5;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  white-space: nowrap;
+
+  transition: background-color 0.2s;
+}
+
+.nav-link i {
+  width: 25px;
+  font-size: 15px;
+}
+
+.nav-link:hover {
+  background-color: #e9eef8;
+}
+
+.nav-link.active {
+  background-color: #e2e8f5;
+  color: #354f8a;
+  font-weight: 500;
+}
+
+
+/* Content */
+
+.content {
+  flex: 1;
+
+  background-color: #f5f6f8;
+
+  padding: 25px;
+
+  overflow-y: auto;
+
+  transition: all 0.25s ease;
+}
+
+.content-expanded {
+  width: 100%;
+}

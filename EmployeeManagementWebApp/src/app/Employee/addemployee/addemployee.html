@@ -1,0 +1,226 @@
+<div class="employee-form">
+
+  <h5 class="mb-4">
+    Add Employee
+  </h5>
+
+  <form [formGroup]="employeeForm">
+
+    <div class="row">
+
+      <!-- Name -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Name
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          formControlName="name"
+          placeholder="Enter employee name">
+
+      </div>
+
+
+      <!-- DOB -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Date of Birth
+        </label>
+
+        <input
+          type="date"
+          class="form-control"
+          formControlName="dob">
+
+      </div>
+
+
+     
+<!-- Department -->
+<div class="col-md-6 mb-3">
+
+  <label class="form-label">
+    Department
+  </label>
+
+  <input
+    type="text"
+    class="form-control"
+    [value]="selectedDepartmentName"
+    (input)="searchDepartment($event)"
+    placeholder="Search department"
+    autocomplete="off"
+    [class.ng-invalid]="
+      employeeForm.controls.departmentId.invalid &&
+      employeeForm.controls.departmentId.touched
+    "
+  >
+
+  @if (showDepartmentDropdown && filteredDepartments.length > 0) {
+
+    <div class="list-group mt-1">
+
+      @for (department of filteredDepartments; track department.id) {
+
+        <button
+          type="button"
+          class="list-group-item list-group-item-action"
+          (mousedown)="selectDepartment(department)"
+        >
+          {{ department.name }}
+        </button>
+
+      }
+
+    </div>
+
+  }
+
+</div>
+
+
+
+
+      <!-- Salary -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Salary
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          formControlName="salary"
+          placeholder="Enter salary">
+
+      </div>
+
+
+      <!-- Phone -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Phone Number
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          formControlName="phoneNumber"
+          placeholder="Enter phone number">
+
+      </div>
+
+
+      <!-- Joining Date -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Joining Date
+        </label>
+
+        <input
+          type="date"
+          class="form-control"
+          formControlName="joiningDate">
+
+      </div>
+
+
+      <!-- Designation -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Designation
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          formControlName="designation"
+          placeholder="Enter designation">
+
+      </div>
+
+
+      <!-- Email -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Email
+        </label>
+
+        <input
+          type="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="Enter email">
+
+      </div>
+
+
+      <!-- Gender -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Gender
+        </label>
+
+        <select
+          class="form-select"
+          formControlName="gender">
+
+          <option value="">
+            Select Gender
+          </option>
+
+          <option value="Male">
+            Male
+          </option>
+
+          <option value="Female">
+            Female
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <!-- Buttons -->
+
+    <div class="text-end mt-3">
+
+      <button
+        type="button"
+        class="btn btn-secondary me-2"
+        (click)="Cancel()">
+
+        <i class="fa-solid fa-times me-1"></i>
+        Cancel
+
+      </button>
+
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="SaveEmployee()">
+
+        <i class="fa-solid fa-floppy-disk me-1"></i>
+        Save
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
