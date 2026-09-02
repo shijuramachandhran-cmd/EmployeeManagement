@@ -9,10 +9,14 @@ on:
     branches:
       - main
 
+
 jobs:
 
+  # =========================
+  # Backend - .NET 9
+  # =========================
   backend:
-    name: Build .NET 9 API
+    name: Build and Test .NET 9 API
 
     runs-on: ubuntu-latest
 
@@ -32,7 +36,13 @@ jobs:
       - name: Build .NET API
         run: dotnet build EmployeeManagementSystem.slnx --configuration Release --no-restore
 
+      - name: Run Unit Tests
+        run: dotnet test EmployeeManagementSystem.Tests/EmployeeManagementSystem.Tests.csproj --configuration Release --no-build
 
+
+  # =========================
+  # Frontend - Angular
+  # =========================
   frontend:
     name: Build Angular Application
 
