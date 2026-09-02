@@ -16,28 +16,64 @@ jobs:
   # Backend - .NET 9
   # =========================
   backend:
-    name: Build and Test .NET 9 API
+    name: Build, Test and Publish .NET 9 API
 
     runs-on: ubuntu-latest
 
     steps:
 
+      # -------------------------
+      # Checkout
+      # -------------------------
       - name: Checkout Code
         uses: actions/checkout@v4
 
+
+      # -------------------------
+      # Setup .NET 9
+      # -------------------------
       - name: Setup .NET 9
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
 
+
+      # -------------------------
+      # Restore
+      # -------------------------
       - name: Restore .NET Dependencies
         run: dotnet restore EmployeeManagementSystem.slnx
 
+
+      # -------------------------
+      # Build
+      # -------------------------
       - name: Build .NET API
         run: dotnet build EmployeeManagementSystem.slnx --configuration Release --no-restore
 
+
+      # -------------------------
+      # Unit Tests
+      # -------------------------
       - name: Run Unit Tests
         run: dotnet test EmployeeManagementSystem.Tests/EmployeeManagementSystem.Tests.csproj --configuration Release --no-build
+
+
+      # -------------------------
+      # Publish
+      # -------------------------
+      - name: Publish .NET API
+        run: dotnet publish EmployeeManagementSystem/EmployeeManagementSystem.csproj --configuration Release --no-build --output ./publish
+
+
+      # -------------------------
+      # Upload .NET Artifact
+      # -------------------------
+      - name: Upload .NET API Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: employee-management-api
+          path: ./publish
 
 
   # =========================
@@ -54,9 +90,16 @@ jobs:
 
     steps:
 
+      # -------------------------
+      # Checkout
+      # -------------------------
       - name: Checkout Code
         uses: actions/checkout@v4
 
+
+      # -------------------------
+      # Setup Node.js
+      # -------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -64,8 +107,26 @@ jobs:
           cache: 'npm'
           cache-dependency-path: EmployeeManagementWebApp/package-lock.json
 
+
+      # -------------------------
+      # Install Dependencies
+      # -------------------------
       - name: Install Angular Dependencies
         run: npm ci
 
+
+      # -------------------------
+      # Build Angular
+      # -------------------------
       - name: Build Angular Application
         run: npm run build
+
+
+      # -------------------------
+      # Upload Angular Artifact
+      # -------------------------
+      - name: Upload Angular Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: employee-management-web
+          path: EmployeeManagementWebApp/dist
