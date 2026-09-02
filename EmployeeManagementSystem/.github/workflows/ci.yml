@@ -1,0 +1,61 @@
+name: Employee Management CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  backend:
+    name: Build .NET 9 API
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore .NET Dependencies
+        run: dotnet restore EmployeeManagementSystem.slnx
+
+      - name: Build .NET API
+        run: dotnet build EmployeeManagementSystem.slnx --configuration Release --no-restore
+
+
+  frontend:
+    name: Build Angular Application
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: EmployeeManagementWebApp
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: EmployeeManagementWebApp/package-lock.json
+
+      - name: Install Angular Dependencies
+        run: npm ci
+
+      - name: Build Angular Application
+        run: npm run build
